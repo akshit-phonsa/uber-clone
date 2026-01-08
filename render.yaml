@@ -1,0 +1,29 @@
+services:
+  - type: web
+    name: uber-app
+    runtime: docker
+    plan: free
+    envVars:
+      - key: SPRING_DATASOURCE_URL
+        fromDatabase:
+          name: uber-db
+          property: connectionString
+      - key: SPRING_DATASOURCE_USERNAME
+        fromDatabase:
+          name: uber-db
+          property: user
+      - key: SPRING_DATASOURCE_PASSWORD
+        fromDatabase:
+          name: uber-db
+          property: password
+      - key: SPRING_JPA_HIBERNATE_DDL_AUTO
+        value: update
+      - key: PORT
+        value: 8080
+
+databases:
+  - name: uber-db
+    databaseName: uber
+    user: uber
+    plan: free
+    ipAllowList: [] # Access only from internal services
