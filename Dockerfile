@@ -30,4 +30,4 @@ HEALTHCHECK --interval=30s --timeout=3s --start-period=10s --retries=3 \
   CMD curl -f http://localhost:$PORT/actuator/health || exit 1
 
 # Run the application
-ENTRYPOINT ["sh", "-c", "java -jar -Dserver.port=${PORT:-8080} app.jar"]
+ENTRYPOINT ["sh", "-c", "java --enable-preview -jar -Dserver.port=${PORT:-8080} app.jar"]
